@@ -33,7 +33,6 @@ interface PreviewDwawerProps {
 
 const PreviewDrawer: React.FC<PreviewDwawerProps> = ({ children, data, open, onClose }) => {
   const { subject, content, fromName, fromDateTime, fromEmail, toEmail, upload_images = [], dynamic = [], cc } = data
-
   const [value, setValue] = useState<string[]>(['abc@gmail.com', 'cde@gmail.com', 'sasd@gmail.com']);
 
   const selectProps: SelectProps = {
@@ -63,8 +62,14 @@ const PreviewDrawer: React.FC<PreviewDwawerProps> = ({ children, data, open, onC
             {
               dynamic.length > 0 && dynamic.map((item, index) => (
                 <Flex gap="small">
-                  <div key={index}>{Object.keys(item)} : </div>
-                  <div key={index}>{Object.values(item)}</div>
+                  {
+                    item &&
+                    <>
+                      <div key={index}>{Object.keys(item)} : </div>
+                      <div key={index}>{Object.values(item)}</div>
+                    </>
+                  }
+                 
                 </Flex>
               ))
             }
