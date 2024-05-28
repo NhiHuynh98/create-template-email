@@ -28,7 +28,7 @@ const props: UploadProps = {
       uid: '3',
       name: 'zzz.png',
       status: 'error',
-      response: 'Server Error 500', // custom error message to show
+      response: 'Server Error 500',
       url: 'http://www.baidu.com/zzz.png',
     },
   ],

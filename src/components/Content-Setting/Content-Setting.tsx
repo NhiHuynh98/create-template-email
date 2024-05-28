@@ -59,11 +59,9 @@ const ContentSetting: React.FC<FormProps> = ({ form }) => {
                                         key={field.key}
                                     >
                                         <div style={{ width: '600px' }}>
-                                        
                                             <Form.Item label="Subject" name={[field.name, 'subject']} rules={[{ required: true }]}>
                                                 <Input />
                                             </Form.Item>
-                
                                             <Form.Item label="Content" name={[field.name, 'content']}  rules={[{ required: true }]}>
                                                 <ReactQuill
                                                     theme="snow"
@@ -77,7 +75,6 @@ const ContentSetting: React.FC<FormProps> = ({ form }) => {
                                             </Form.Item>
                                         </div>
                                         <div style={{ width: '50%', paddingLeft: 40 }}>
-
                                             <Form.Item label="To Email" name={[field.name, 'toEmail']} rules={[{ required: true }]}>
                                                 <Input />
                                             </Form.Item>
@@ -90,9 +87,6 @@ const ContentSetting: React.FC<FormProps> = ({ form }) => {
                                             <Form.Item label="Date Time" name={[field.name, 'fromDateTime']} rules={[{ required: true }]}>
                                                 <Input />
                                             </Form.Item>
-                                            {/* <Form.Item label="Reply to" name={[field.name, 'replyTo']} rules={[{ required: true }]}>
-                                                <Input />
-                                            </Form.Item> */}
                                             <Form.Item label="CC" name={[field.name, 'cc']} rules={[{ required: true }]}>
                                                 <Input />
                                             </Form.Item>

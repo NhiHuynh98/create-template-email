@@ -57,13 +57,14 @@ const PreviewDrawer: React.FC<PreviewDwawerProps> = ({ children, data, open, onC
               readOnly={true}
               theme={"bubble"}
             />
-
+          
+            <Divider />
             <p>Content In Dynamic Setting</p>
             {
               dynamic.length > 0 && dynamic.map((item, index) => (
                 <Flex gap="small">
                   <div key={index}>{Object.keys(item)} : </div>
-                  <div key={index}>{Object.keys(value)}</div>
+                  <div key={index}>{Object.values(item)}</div>
                 </Flex>
               ))
             }
@@ -72,7 +73,7 @@ const PreviewDrawer: React.FC<PreviewDwawerProps> = ({ children, data, open, onC
           </div>
           <Divider />
 
-          {/* <AttachFile /> */}
+          <AttachFile />
 
           {
             upload_images.length >0 && upload_images.map((img, index) => (

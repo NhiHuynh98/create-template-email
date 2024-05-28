@@ -104,7 +104,6 @@ const Template: React.FC = () => {
       if (values3){
         combinedData = { ...combinedData, ...values3};
       }
-      console.log("combinedData", combinedData)
       setData(combinedData)
       showDrawer();
 

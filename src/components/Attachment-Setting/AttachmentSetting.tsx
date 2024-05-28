@@ -35,7 +35,6 @@ const AttachmentSetting: React.FC<FormProps> = ({ form }) => {
                     valuePropName="fileList"
                     getValueFromEvent={normFile}              
                 >
-
                     <Upload
                         action="http://localhost:5000/api/upload"
                         listType="picture-card"

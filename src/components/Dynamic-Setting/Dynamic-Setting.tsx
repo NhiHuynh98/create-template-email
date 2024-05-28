@@ -1,22 +1,12 @@
 import React, { useCallback, useState } from 'react';
-import { PlusOutlined,MinusCircleOutlined } from '@ant-design/icons';
+
+import { PlusOutlined } from '@ant-design/icons';
 import { Button, Form, Input, Typography } from 'antd';
 import { FormInstance } from 'antd/lib/form';
 
 export interface FormProps {
   form: FormInstance<any>;
 }
-
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 4 },
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 20 },
-  },
-};
 
 interface FieldType {
   field_id: number,
@@ -35,8 +25,7 @@ const DynamicSetting: React.FC<FormProps> = ({ form }) => {
   }
 
   const handleChange = useCallback((e, id) => {
-    console.log("id", id)
-    const { name, value } = e.target;
+    const { value } = e.target;
     let data = { field_id: id, field_name: value}
      setFieldDynamic(prevState => {
         const index = prevState.findIndex(item => item?.field_id === id)
@@ -51,8 +40,6 @@ const DynamicSetting: React.FC<FormProps> = ({ form }) => {
      })
   }, [])
 
-  console.log("ssdsdf", fieldDynamic)
-  
   return (
     <Form
       labelCol={{ flex: '110px' }}
@@ -97,16 +84,6 @@ const DynamicSetting: React.FC<FormProps> = ({ form }) => {
               >
                 Add field
               </Button>
-              {/* <Button
-                type="dashed"
-                onClick={() => {
-                  add('The head item', 0);
-                }}
-                style={{ width: '60%', marginTop: '20px' }}
-                icon={<PlusOutlined />}
-              >
-                Add field at head
-              </Button> */}
               <Form.ErrorList errors={errors} />
             </Form.Item>
           </>
