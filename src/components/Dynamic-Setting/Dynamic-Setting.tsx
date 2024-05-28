@@ -1,7 +1,11 @@
-import React from 'react';
-import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import React, { useCallback, useState } from 'react';
+import { PlusOutlined,MinusCircleOutlined } from '@ant-design/icons';
 import { Button, Form, Input, Typography } from 'antd';
 import { FormInstance } from 'antd/lib/form';
+
+export interface FormProps {
+  form: FormInstance<any>;
+}
 
 const formItemLayout = {
   labelCol: {
@@ -14,12 +18,41 @@ const formItemLayout = {
   },
 };
 
-export interface FormProps {
-  form: FormInstance<any>;
+interface FieldType {
+  field_id: number,
+  field_name: string
 }
 
-
 const DynamicSetting: React.FC<FormProps> = ({ form }) => {
+  const [isEditing, setIsEditing] = useState<number>(0);
+  const [fieldDynamic, setFieldDynamic] = useState<FieldType[]>([{
+    field_id: 1,
+    field_name: 'Field_01'
+  }])
+
+  const handleDoubleClick = (index) => {
+    setIsEditing(index)
+  }
+
+  const handleChange = useCallback((e, id) => {
+    console.log("id", id)
+    const { name, value } = e.target;
+    let data = { field_id: id, field_name: value}
+     setFieldDynamic(prevState => {
+        const index = prevState.findIndex(item => item?.field_id === id)
+        if (index !== -1) {
+          return [
+            ...prevState.slice(0, index),
+            data,
+            ...prevState.slice(index + 1)
+          ];
+        }
+        return [...prevState, data];
+     })
+  }, [])
+
+  console.log("ssdsdf", fieldDynamic)
+  
   return (
     <Form
       labelCol={{ flex: '110px' }}
@@ -32,31 +65,27 @@ const DynamicSetting: React.FC<FormProps> = ({ form }) => {
       initialValues={{ items: [{}] }}
     >
       <Form.List
-        name="cc"
+        name="dynamic"
       >
-        {(fields, { add, remove }, { errors }) => (
+        {(fields, { add }, { errors }) => (
           <>
             {fields.map((field, index) => (
-              <Form.Item
-                // {...(index === 0 ? formItemLayout : formItemLayoutWithOutLabel)}
-                {...formItemLayout}
-                // label={index === 0 ? 'Passengers' : ''}
-                required={false}
-                key={field.key}
-              >
-                <Form.Item
-                  {...field}
-                  validateTrigger={['onChange', 'onBlur']}
-                  noStyle
-                >
-                  <Input style={{ width: '60%' }} />
-                </Form.Item>
-                {fields.length > 1 ? (
-                  <MinusCircleOutlined
-                    className="dynamic-delete-button"
-                    onClick={() => remove(field.name)}
-                  />
-                ) : null}
+              <Form.Item label={
+                <div className='w-52' onDoubleClick={() => handleDoubleClick(index)}>
+                  {isEditing === index ? (
+                      <input
+                          type="text"
+                          name="field_name"
+                          value={fieldDynamic[index]?.field_name}
+                          onChange={(event) => handleChange(event, index + 1)}
+                          autoFocus
+                      />
+                      ) : (
+                      <span>{fieldDynamic[index]?.field_name || 'Field_01'}</span>
+                  )}
+                </div>
+            } name={[field.name, fieldDynamic[index]?.field_name]}>
+                <Input />
               </Form.Item>
             ))}
             <Form.Item>

@@ -38,7 +38,8 @@ export interface FormData {
   cc: string;
   toEmail: string;
   fromDateTime: string;
-  upload_images: ImageProps[]
+  upload_images: ImageProps[];
+  dynamic: []
 }
 
 interface FieldsData {
@@ -65,9 +66,10 @@ const Template: React.FC = () => {
     "fromEmail": "",
     "replyTo": "",
     "bcc": "",
-    "cc": "",
     "fromDateTime": "",
-    "upload_images": []
+    "upload_images": [],
+    "dynamic": [],
+    "cc": ""
   })
   const [fieldsKey, setFieldsKey] = useState<FieldsData[]>(
     [
@@ -90,14 +92,10 @@ const Template: React.FC = () => {
   }, [inputField, fieldsKey])
 
 
-  const handleFinish = () => {
-    console.log("data", data)
-  };
-
   const handePreview = () => {
     form1.validateFields().then(values1 => {
       const values2 = form2.getFieldsValue('upload_images');
-      const values3 = form3.getFieldsValue('cc');
+      const values3 = form3.getFieldsValue('dynamic');
 
       let combinedData = { ...values1.items[0]};
       if (values2){
@@ -161,9 +159,9 @@ const Template: React.FC = () => {
             </div>
 
             <Flex gap="large" className='mt-4'>
-              <Button type="primary" htmlType="submit" onClick={handleFinish}>Submit</Button>
+              {/* <Button type="primary" htmlType="submit" onClick={handleFinish}>Submit</Button> */}
               <PreviewDrawer data={data} open={open} onClose={onClose}>
-                <Button onClick={handePreview}>Preview</Button>
+                <Button type="primary" onClick={handePreview} >Preview</Button>
               </PreviewDrawer>
             </Flex>
           </>

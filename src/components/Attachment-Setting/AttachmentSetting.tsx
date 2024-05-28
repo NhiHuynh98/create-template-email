@@ -34,12 +34,6 @@ const AttachmentSetting: React.FC<FormProps> = ({ form }) => {
                     name="upload_images"
                     valuePropName="fileList"
                     getValueFromEvent={normFile}              
-                    rules={[
-                        {
-                            required: true, 
-                            message: 'Please choose an image!' 
-                        }
-                    ]}          
                 >
 
                     <Upload

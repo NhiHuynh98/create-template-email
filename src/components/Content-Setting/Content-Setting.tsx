@@ -93,9 +93,9 @@ const ContentSetting: React.FC<FormProps> = ({ form }) => {
                                             {/* <Form.Item label="Reply to" name={[field.name, 'replyTo']} rules={[{ required: true }]}>
                                                 <Input />
                                             </Form.Item> */}
-                                            {/* <Form.Item label="CC" name={[field.name, 'cc']} rules={[{ required: true }]}>
+                                            <Form.Item label="CC" name={[field.name, 'cc']} rules={[{ required: true }]}>
                                                 <Input />
-                                            </Form.Item> */}
+                                            </Form.Item>
                                         </div>
                                     </Flex>
                                 ))

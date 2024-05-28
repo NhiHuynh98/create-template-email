@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Select, Divider, Drawer, Flex } from 'antd';
 import type { SelectProps } from 'antd';
 
@@ -32,15 +32,14 @@ interface PreviewDwawerProps {
 }
 
 const PreviewDrawer: React.FC<PreviewDwawerProps> = ({ children, data, open, onClose }) => {
-  const { subject, content, fromName, fromDateTime, fromEmail, toEmail, upload_images = [], cc = [] } = data
+  const { subject, content, fromName, fromDateTime, fromEmail, toEmail, upload_images = [], dynamic = [], cc } = data
 
-  const [value, setValue] = useState(cc);
-  console.log("previewData", data)
+  const [value, setValue] = useState<string[]>(['abc@gmail.com', 'cde@gmail.com', 'sasd@gmail.com']);
+
   const selectProps: SelectProps = {
     value,
     onChange: setValue,
   };
-
   return (
     <>
       { children }
@@ -58,6 +57,16 @@ const PreviewDrawer: React.FC<PreviewDwawerProps> = ({ children, data, open, onC
               readOnly={true}
               theme={"bubble"}
             />
+
+            <p>Content In Dynamic Setting</p>
+            {
+              dynamic.length > 0 && dynamic.map((item, index) => (
+                <Flex gap="small">
+                  <div key={index}>{Object.keys(item)} : </div>
+                  <div key={index}>{Object.keys(value)}</div>
+                </Flex>
+              ))
+            }
             <p>Best Regards</p>
             <p>FROM: { fromName }</p>
           </div>
